@@ -1,0 +1,23 @@
+name: 自动生成主页
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+    - run: python build.py
+    - uses: stefanzweifel/git-auto-commit-action@v5
+      with:
+        commit_message: 机器人自动更新网页
+        file_pattern: index.html
