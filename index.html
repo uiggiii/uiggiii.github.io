@@ -5,118 +5,231 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>uiggiii's repository</title>
 <style>
-:root { --primary: #3498db; --bg: #f8f9fa; --text: #2c3e50; }
-body { font-family: -apple-system, system-ui, sans-serif; background: var(--bg); color: var(--text); padding: 20px; max-width: 800px; margin: 0 auto; }
-h1 { text-align: center; color: var(--primary); font-size: 28px; margin-bottom: 30px; }
+:root { --primary: #3498db; --bg: #f8f9fa; --text: #2c3e50; --card: #ffffff; }
+body { font-family: -apple-system, system-ui, sans-serif; background: var(--bg); color: var(--text); padding: 20px; max-width: 800px; margin: 0 auto; line-height: 1.6; }
+h1 { text-align: center; color: var(--primary); margin-bottom: 30px; font-weight: 800; }
 
-/* 搜索框样式 */
+/* 搜索框 */
 .search-container { position: sticky; top: 10px; z-index: 100; margin-bottom: 25px; }
-#searchInput { width: 100%; padding: 15px; border: 2px solid #ddd; border-radius: 12px; font-size: 16px; box-sizing: border-box; outline: none; transition: border-color 0.3s; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+#searchInput { width: 100%; padding: 15px; border: 2px solid #ddd; border-radius: 12px; font-size: 16px; box-sizing: border-box; outline: none; box-shadow: 0 4px 12px rgba(0,0,0,0.08); transition: 0.3s; }
 #searchInput:focus { border-color: var(--primary); }
 
-/* 折叠组样式 */
-details { background: white; margin-bottom: 15px; border-radius: 10px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
-summary { padding: 15px; font-weight: bold; cursor: pointer; background: white; list-style: none; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #f0f0f0; }
+/* 折叠容器 */
+details { background: var(--card); margin-bottom: 15px; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.05); border: 1px solid #eee; }
+summary { padding: 16px; font-weight: bold; cursor: pointer; display: flex; justify-content: space-between; align-items: center; user-select: none; }
 summary::-webkit-details-marker { display: none; }
-summary::after { content: '▶'; font-size: 12px; transition: transform 0.3s; color: #ccc; }
+summary::after { content: '▶'; font-size: 10px; color: #bbb; transition: 0.3s; }
 details[open] summary::after { transform: rotate(90deg); }
+details[open] summary { border-bottom: 1px solid #f5f5f5; }
 
-/* 卡片链接样式 */
+/* 文件列表与卡片 */
 .file-list { padding: 10px; }
-.card { display: block; padding: 12px 15px; margin: 5px 0; background: #fff; text-decoration: none; color: #444; border-radius: 6px; border-left: 3px solid transparent; transition: all 0.2s; font-size: 14px; }
-.card:hover { background: #f0f7ff; border-left-color: var(--primary); padding-left: 20px; }
+.card-item { display: flex; justify-content: space-between; align-items: center; padding: 12px; margin: 6px 0; background: #fff; border-radius: 8px; border: 1px solid #f0f0f0; transition: 0.2s; }
+.card-item:hover { background: #f9fcff; border-color: var(--primary); transform: translateX(5px); }
+.file-info { text-decoration: none; color: #444; font-size: 14px; flex-grow: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; margin-right: 10px; }
+.preview-btn { padding: 5px 12px; font-size: 12px; color: var(--primary); border: 1px solid var(--primary); border-radius: 6px; text-decoration: none; transition: 0.2s; }
+.preview-btn:hover { background: var(--primary); color: #fff; }
 </style>
 </head>
 <body>
 <h1>uiggiii's repository</h1>
-
-<div class="search-container">
-    <input type="text" id="searchInput" placeholder="搜索文件名..." onkeyup="filterFiles()">
-</div>
-
+<div class="search-container"><input type="text" id="searchInput" placeholder="输入关键字搜索文件..." onkeyup="filterFiles()"></div>
 <div id="repo-content">
 <details open>
 <summary>UCB_CS61A</summary>
 <div class="file-list">
-<a href="UCB_CS61A/01_slide.pdf" class="card">01_slide.pdf</a>
-<a href="UCB_CS61A/a_plus_absb.py" class="card">a_plus_absb.py</a>
-<a href="UCB_CS61A/hailstone.py" class="card">hailstone.py</a>
-<a href="UCB_CS61A/hw01_two_of_three.py" class="card">hw01_two_of_three.py</a>
-<a href="UCB_CS61A/largest_factor.py" class="card">largest_factor.py</a>
-<a href="UCB_CS61A/print_and_return.py" class="card">print_and_return.py</a>
-</div>
+
+            <div class="card-item">
+                <a href="UCB_CS61A/01_slide.pdf" class="file-info" download>01_slide.pdf</a>
+                <a href="UCB_CS61A/01_slide.pdf" target="_blank" class="preview-btn">预览</a>
+            </div>
+            <div class="card-item">
+                <a href="UCB_CS61A/a_plus_absb.py" class="file-info" download>a_plus_absb.py</a>
+                <a href="UCB_CS61A/a_plus_absb.py" target="_blank" class="preview-btn">预览</a>
+            </div>
+            <div class="card-item">
+                <a href="UCB_CS61A/hailstone.py" class="file-info" download>hailstone.py</a>
+                <a href="UCB_CS61A/hailstone.py" target="_blank" class="preview-btn">预览</a>
+            </div>
+            <div class="card-item">
+                <a href="UCB_CS61A/hw01_two_of_three.py" class="file-info" download>hw01_two_of_three.py</a>
+                <a href="UCB_CS61A/hw01_two_of_three.py" target="_blank" class="preview-btn">预览</a>
+            </div>
+            <div class="card-item">
+                <a href="UCB_CS61A/largest_factor.py" class="file-info" download>largest_factor.py</a>
+                <a href="UCB_CS61A/largest_factor.py" target="_blank" class="preview-btn">预览</a>
+            </div>
+            <div class="card-item">
+                <a href="UCB_CS61A/print_and_return.py" class="file-info" download>print_and_return.py</a>
+                <a href="UCB_CS61A/print_and_return.py" target="_blank" class="preview-btn">预览</a>
+            </div></div>
 </details>
 <details open>
 <summary>compute_physics</summary>
 <div class="file-list">
-<a href="compute_physics/1-1_generation1.py" class="card">1-1_generation1.py</a>
-<a href="compute_physics/1-1_generation2.py" class="card">1-1_generation2.py</a>
-<a href="compute_physics/1-2.py" class="card">1-2.py</a>
-<a href="compute_physics/1-3.py" class="card">1-3.py</a>
-<a href="compute_physics/1.docx" class="card">1.docx</a>
-<a href="compute_physics/1.pdf" class="card">1.pdf</a>
-<a href="compute_physics/1.zip" class="card">1.zip</a>
-<a href="compute_physics/2-1.py" class="card">2-1.py</a>
-<a href="compute_physics/2-2.py" class="card">2-2.py</a>
-<a href="compute_physics/2.pdf" class="card">2.pdf</a>
-<a href="compute_physics/3-1.py" class="card">3-1.py</a>
-<a href="compute_physics/3240105591-2.zip" class="card">3240105591-2.zip</a>
-<a href="compute_physics/Figure_1.png" class="card">Figure_1.png</a>
-<a href="compute_physics/Figure_2.png" class="card">Figure_2.png</a>
-<a href="compute_physics/Figure_3.png" class="card">Figure_3.png</a>
-<a href="compute_physics/Homework-CP-2026-1.pdf" class="card">Homework-CP-2026-1.pdf</a>
-<a href="compute_physics/Homework-CP-2026-2 (1).pdf" class="card">Homework-CP-2026-2 (1).pdf</a>
-<a href="compute_physics/Homework-CP-2026-3.pdf" class="card">Homework-CP-2026-3.pdf</a>
-<a href="compute_physics/Homework-CP-2026-4.pdf" class="card">Homework-CP-2026-4.pdf</a>
-<a href="compute_physics/Omega=1.png" class="card">Omega=1.png</a>
-<a href="compute_physics/omega=0.5.png" class="card">omega=0.5.png</a>
-<a href="compute_physics/omega=2.png" class="card">omega=2.png</a>
-</div>
+
+            <div class="card-item">
+                <a href="compute_physics/1-1_generation1.py" class="file-info" download>1-1_generation1.py</a>
+                <a href="compute_physics/1-1_generation1.py" target="_blank" class="preview-btn">预览</a>
+            </div>
+            <div class="card-item">
+                <a href="compute_physics/1-1_generation2.py" class="file-info" download>1-1_generation2.py</a>
+                <a href="compute_physics/1-1_generation2.py" target="_blank" class="preview-btn">预览</a>
+            </div>
+            <div class="card-item">
+                <a href="compute_physics/1-2.py" class="file-info" download>1-2.py</a>
+                <a href="compute_physics/1-2.py" target="_blank" class="preview-btn">预览</a>
+            </div>
+            <div class="card-item">
+                <a href="compute_physics/1-3.py" class="file-info" download>1-3.py</a>
+                <a href="compute_physics/1-3.py" target="_blank" class="preview-btn">预览</a>
+            </div>
+            <div class="card-item">
+                <a href="compute_physics/1.docx" class="file-info" download>1.docx</a>
+                <a href="https://docs.google.com/viewer?url=https://uiggiii.github.io/compute_physics/1.docx&embedded=true" target="_blank" class="preview-btn">预览</a>
+            </div>
+            <div class="card-item">
+                <a href="compute_physics/1.pdf" class="file-info" download>1.pdf</a>
+                <a href="compute_physics/1.pdf" target="_blank" class="preview-btn">预览</a>
+            </div>
+            <div class="card-item">
+                <a href="compute_physics/1.zip" class="file-info" download>1.zip</a>
+                <a href="compute_physics/1.zip" target="_blank" class="preview-btn">预览</a>
+            </div>
+            <div class="card-item">
+                <a href="compute_physics/2-1.py" class="file-info" download>2-1.py</a>
+                <a href="compute_physics/2-1.py" target="_blank" class="preview-btn">预览</a>
+            </div>
+            <div class="card-item">
+                <a href="compute_physics/2-2.py" class="file-info" download>2-2.py</a>
+                <a href="compute_physics/2-2.py" target="_blank" class="preview-btn">预览</a>
+            </div>
+            <div class="card-item">
+                <a href="compute_physics/2.pdf" class="file-info" download>2.pdf</a>
+                <a href="compute_physics/2.pdf" target="_blank" class="preview-btn">预览</a>
+            </div>
+            <div class="card-item">
+                <a href="compute_physics/3-1.py" class="file-info" download>3-1.py</a>
+                <a href="compute_physics/3-1.py" target="_blank" class="preview-btn">预览</a>
+            </div>
+            <div class="card-item">
+                <a href="compute_physics/3240105591-2.zip" class="file-info" download>3240105591-2.zip</a>
+                <a href="compute_physics/3240105591-2.zip" target="_blank" class="preview-btn">预览</a>
+            </div>
+            <div class="card-item">
+                <a href="compute_physics/Figure_1.png" class="file-info" download>Figure_1.png</a>
+                <a href="compute_physics/Figure_1.png" target="_blank" class="preview-btn">预览</a>
+            </div>
+            <div class="card-item">
+                <a href="compute_physics/Figure_2.png" class="file-info" download>Figure_2.png</a>
+                <a href="compute_physics/Figure_2.png" target="_blank" class="preview-btn">预览</a>
+            </div>
+            <div class="card-item">
+                <a href="compute_physics/Figure_3.png" class="file-info" download>Figure_3.png</a>
+                <a href="compute_physics/Figure_3.png" target="_blank" class="preview-btn">预览</a>
+            </div>
+            <div class="card-item">
+                <a href="compute_physics/Homework-CP-2026-1.pdf" class="file-info" download>Homework-CP-2026-1.pdf</a>
+                <a href="compute_physics/Homework-CP-2026-1.pdf" target="_blank" class="preview-btn">预览</a>
+            </div>
+            <div class="card-item">
+                <a href="compute_physics/Homework-CP-2026-2 (1).pdf" class="file-info" download>Homework-CP-2026-2 (1).pdf</a>
+                <a href="compute_physics/Homework-CP-2026-2 (1).pdf" target="_blank" class="preview-btn">预览</a>
+            </div>
+            <div class="card-item">
+                <a href="compute_physics/Homework-CP-2026-3.pdf" class="file-info" download>Homework-CP-2026-3.pdf</a>
+                <a href="compute_physics/Homework-CP-2026-3.pdf" target="_blank" class="preview-btn">预览</a>
+            </div>
+            <div class="card-item">
+                <a href="compute_physics/Homework-CP-2026-4.pdf" class="file-info" download>Homework-CP-2026-4.pdf</a>
+                <a href="compute_physics/Homework-CP-2026-4.pdf" target="_blank" class="preview-btn">预览</a>
+            </div>
+            <div class="card-item">
+                <a href="compute_physics/Omega=1.png" class="file-info" download>Omega=1.png</a>
+                <a href="compute_physics/Omega=1.png" target="_blank" class="preview-btn">预览</a>
+            </div>
+            <div class="card-item">
+                <a href="compute_physics/omega=0.5.png" class="file-info" download>omega=0.5.png</a>
+                <a href="compute_physics/omega=0.5.png" target="_blank" class="preview-btn">预览</a>
+            </div>
+            <div class="card-item">
+                <a href="compute_physics/omega=2.png" class="file-info" download>omega=2.png</a>
+                <a href="compute_physics/omega=2.png" target="_blank" class="preview-btn">预览</a>
+            </div></div>
 </details>
 <details open>
 <summary>mit_18.01</summary>
 <div class="file-list">
-<a href="mit_18.01/differentiation_answer.pdf" class="card">differentiation_answer.pdf</a>
-<a href="mit_18.01/differentiation_problem_set.pdf" class="card">differentiation_problem_set.pdf</a>
-<a href="mit_18.01/exam1.pdf" class="card">exam1.pdf</a>
-<a href="mit_18.01/exam1sol.pdf" class="card">exam1sol.pdf</a>
-<a href="mit_18.01/exam2.pdf" class="card">exam2.pdf</a>
-<a href="mit_18.01/exam2sol.pdf" class="card">exam2sol.pdf</a>
-<a href="mit_18.01/exam3.pdf" class="card">exam3.pdf</a>
-<a href="mit_18.01/exam3sol.pdf" class="card">exam3sol.pdf</a>
-<a href="mit_18.01/exam4.pdf" class="card">exam4.pdf</a>
-<a href="mit_18.01/exam4sol.pdf" class="card">exam4sol.pdf</a>
-<a href="mit_18.01/integration_techniques_answer.pdf" class="card">integration_techniques_answer.pdf</a>
-<a href="mit_18.01/integration_techniques_problem_set.pdf" class="card">integration_techniques_problem_set.pdf</a>
-</div>
+
+            <div class="card-item">
+                <a href="mit_18.01/differentiation_answer.pdf" class="file-info" download>differentiation_answer.pdf</a>
+                <a href="mit_18.01/differentiation_answer.pdf" target="_blank" class="preview-btn">预览</a>
+            </div>
+            <div class="card-item">
+                <a href="mit_18.01/differentiation_problem_set.pdf" class="file-info" download>differentiation_problem_set.pdf</a>
+                <a href="mit_18.01/differentiation_problem_set.pdf" target="_blank" class="preview-btn">预览</a>
+            </div>
+            <div class="card-item">
+                <a href="mit_18.01/exam1.pdf" class="file-info" download>exam1.pdf</a>
+                <a href="mit_18.01/exam1.pdf" target="_blank" class="preview-btn">预览</a>
+            </div>
+            <div class="card-item">
+                <a href="mit_18.01/exam1sol.pdf" class="file-info" download>exam1sol.pdf</a>
+                <a href="mit_18.01/exam1sol.pdf" target="_blank" class="preview-btn">预览</a>
+            </div>
+            <div class="card-item">
+                <a href="mit_18.01/exam2.pdf" class="file-info" download>exam2.pdf</a>
+                <a href="mit_18.01/exam2.pdf" target="_blank" class="preview-btn">预览</a>
+            </div>
+            <div class="card-item">
+                <a href="mit_18.01/exam2sol.pdf" class="file-info" download>exam2sol.pdf</a>
+                <a href="mit_18.01/exam2sol.pdf" target="_blank" class="preview-btn">预览</a>
+            </div>
+            <div class="card-item">
+                <a href="mit_18.01/exam3.pdf" class="file-info" download>exam3.pdf</a>
+                <a href="mit_18.01/exam3.pdf" target="_blank" class="preview-btn">预览</a>
+            </div>
+            <div class="card-item">
+                <a href="mit_18.01/exam3sol.pdf" class="file-info" download>exam3sol.pdf</a>
+                <a href="mit_18.01/exam3sol.pdf" target="_blank" class="preview-btn">预览</a>
+            </div>
+            <div class="card-item">
+                <a href="mit_18.01/exam4.pdf" class="file-info" download>exam4.pdf</a>
+                <a href="mit_18.01/exam4.pdf" target="_blank" class="preview-btn">预览</a>
+            </div>
+            <div class="card-item">
+                <a href="mit_18.01/exam4sol.pdf" class="file-info" download>exam4sol.pdf</a>
+                <a href="mit_18.01/exam4sol.pdf" target="_blank" class="preview-btn">预览</a>
+            </div>
+            <div class="card-item">
+                <a href="mit_18.01/integration_techniques_answer.pdf" class="file-info" download>integration_techniques_answer.pdf</a>
+                <a href="mit_18.01/integration_techniques_answer.pdf" target="_blank" class="preview-btn">预览</a>
+            </div>
+            <div class="card-item">
+                <a href="mit_18.01/integration_techniques_problem_set.pdf" class="file-info" download>integration_techniques_problem_set.pdf</a>
+                <a href="mit_18.01/integration_techniques_problem_set.pdf" target="_blank" class="preview-btn">预览</a>
+            </div></div>
 </details>
 
 </div>
-
 <script>
 function filterFiles() {
     let input = document.getElementById('searchInput').value.toLowerCase();
-    let cards = document.getElementsByClassName('card');
+    let cards = document.getElementsByClassName('card-item');
     let groups = document.getElementsByTagName('details');
 
-    for (let card of cards) {
-        let fileName = card.innerText.toLowerCase();
-        if (fileName.includes(input)) {
-            card.style.display = "";
-        } else {
-            card.style.display = "none";
-        }
+    if (input !== "") {
+        for (let g of groups) g.open = true;
     }
 
-    // 如果组内有匹配的文件，自动展开该组；如果没有匹配，则隐藏该组
+    for (let card of cards) {
+        let text = card.querySelector('.file-info').innerText.toLowerCase();
+        card.style.display = text.includes(input) ? "" : "none";
+    }
+
     for (let group of groups) {
-        let visibleCards = group.querySelectorAll('.card[style="display: "], .card:not([style])');
-        if (visibleCards.length > 0) {
-            group.style.display = "";
-            if (input !== "") group.open = true;
-        } else {
-            group.style.display = "none";
-        }
+        let hasVisible = group.querySelectorAll('.card-item[style="display: "], .card-item:not([style])').length > 0;
+        group.style.display = hasVisible ? "" : "none";
     }
 }
 </script>
