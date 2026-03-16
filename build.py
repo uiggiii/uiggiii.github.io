@@ -80,6 +80,11 @@ function filterFiles() {
 }
 </script>
 </body>
+<a href="http://doc.uiggiii.com:5244" target="_blank" style="text-decoration: none;">
+    <button style="padding: 10px 20px; background-color: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer;">
+        私人云盘
+    </button>
+</a>
 </html>
 """
 
