@@ -51,23 +51,30 @@ function filterFiles() {
     let cards = document.getElementsByClassName('card');
     let groups = document.getElementsByTagName('details');
 
+    // 处理文件卡片的显示
     for (let card of cards) {
         let fileName = card.innerText.toLowerCase();
-        if (fileName.includes(input)) {
+        if (input === "" || fileName.includes(input)) {
             card.style.display = "";
         } else {
             card.style.display = "none";
         }
     }
 
-    // 如果组内有匹配的文件，自动展开该组；如果没有匹配，则隐藏该组
+    // 处理文件夹组的显示
     for (let group of groups) {
-        let visibleCards = group.querySelectorAll('.card[style="display: "], .card:not([style])');
-        if (visibleCards.length > 0) {
+        if (input === "") {
+            // 当搜索框清空，显示所有组
             group.style.display = "";
-            if (input !== "") group.open = true;
         } else {
-            group.style.display = "none";
+            // 搜索时，检查组内是否有可见卡片
+            let visibleCards = group.querySelectorAll('.card:not([style*="display: none"])');
+            if (visibleCards.length > 0) {
+                group.style.display = "";
+                group.open = true; // 自动展开有匹配项的组
+            } else {
+                group.style.display = "none";
+            }
         }
     }
 }
@@ -77,11 +84,13 @@ function filterFiles() {
 """
 
 网页主体 = ""
+# 排序文件夹
 所有项目 = sorted(os.listdir('.'))
 
 for 文件夹名 in 所有项目:
     if os.path.isdir(文件夹名) and 文件夹名 not in 忽略目录:
         网页主体 += f'<details open>\n<summary>{文件夹名}</summary>\n<div class="file-list">\n'
+        # 排序文件内容
         目录内容 = sorted(os.listdir(文件夹名))
         for 文件名 in 目录内容:
             if 文件名 not in 忽略文件:
