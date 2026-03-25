@@ -1,9 +1,4 @@
-import os
-
-忽略目录 = ['.git', '.vscode', '__pycache__', '.github']
-忽略文件 = ['index.html', 'build.py', '.gitignore', 'README.md']
-
-网页头部 = """<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
@@ -44,9 +39,62 @@ details[open] summary::after { transform: rotate(90deg); }
 </div>
 
 <div id="repo-content">
-"""
+<details open>
+<summary>UCB_CS61A</summary>
+<div class="file-list">
+<a href="UCB_CS61A/01_slide.pdf" class="card">01_slide.pdf</a>
+<a href="UCB_CS61A/a_plus_absb.py" class="card">a_plus_absb.py</a>
+<a href="UCB_CS61A/hailstone.py" class="card">hailstone.py</a>
+<a href="UCB_CS61A/hw01_two_of_three.py" class="card">hw01_two_of_three.py</a>
+<a href="UCB_CS61A/largest_factor.py" class="card">largest_factor.py</a>
+<a href="UCB_CS61A/print_and_return.py" class="card">print_and_return.py</a>
+</div>
+</details>
+<details open>
+<summary>compute_physics</summary>
+<div class="file-list">
+<a href="compute_physics/1-1_generation1.py" class="card">1-1_generation1.py</a>
+<a href="compute_physics/1-1_generation2.py" class="card">1-1_generation2.py</a>
+<a href="compute_physics/1-2.py" class="card">1-2.py</a>
+<a href="compute_physics/1-3.py" class="card">1-3.py</a>
+<a href="compute_physics/1.docx" class="card">1.docx</a>
+<a href="compute_physics/1.pdf" class="card">1.pdf</a>
+<a href="compute_physics/1.zip" class="card">1.zip</a>
+<a href="compute_physics/2-1.py" class="card">2-1.py</a>
+<a href="compute_physics/2-2.py" class="card">2-2.py</a>
+<a href="compute_physics/2.pdf" class="card">2.pdf</a>
+<a href="compute_physics/3-1.py" class="card">3-1.py</a>
+<a href="compute_physics/3240105591-2.zip" class="card">3240105591-2.zip</a>
+<a href="compute_physics/Figure_1.png" class="card">Figure_1.png</a>
+<a href="compute_physics/Figure_2.png" class="card">Figure_2.png</a>
+<a href="compute_physics/Figure_3.png" class="card">Figure_3.png</a>
+<a href="compute_physics/Homework-CP-2026-1.pdf" class="card">Homework-CP-2026-1.pdf</a>
+<a href="compute_physics/Homework-CP-2026-2 (1).pdf" class="card">Homework-CP-2026-2 (1).pdf</a>
+<a href="compute_physics/Homework-CP-2026-3.pdf" class="card">Homework-CP-2026-3.pdf</a>
+<a href="compute_physics/Homework-CP-2026-4.pdf" class="card">Homework-CP-2026-4.pdf</a>
+<a href="compute_physics/Omega=1.png" class="card">Omega=1.png</a>
+<a href="compute_physics/omega=0.5.png" class="card">omega=0.5.png</a>
+<a href="compute_physics/omega=2.png" class="card">omega=2.png</a>
+</div>
+</details>
+<details open>
+<summary>mit_18.01</summary>
+<div class="file-list">
+<a href="mit_18.01/differentiation_answer.pdf" class="card">differentiation_answer.pdf</a>
+<a href="mit_18.01/differentiation_problem_set.pdf" class="card">differentiation_problem_set.pdf</a>
+<a href="mit_18.01/exam1.pdf" class="card">exam1.pdf</a>
+<a href="mit_18.01/exam1sol.pdf" class="card">exam1sol.pdf</a>
+<a href="mit_18.01/exam2.pdf" class="card">exam2.pdf</a>
+<a href="mit_18.01/exam2sol.pdf" class="card">exam2sol.pdf</a>
+<a href="mit_18.01/exam3.pdf" class="card">exam3.pdf</a>
+<a href="mit_18.01/exam3sol.pdf" class="card">exam3sol.pdf</a>
+<a href="mit_18.01/exam4.pdf" class="card">exam4.pdf</a>
+<a href="mit_18.01/exam4sol.pdf" class="card">exam4sol.pdf</a>
+<a href="mit_18.01/integration_techniques_answer.pdf" class="card">integration_techniques_answer.pdf</a>
+<a href="mit_18.01/integration_techniques_problem_set.pdf" class="card">integration_techniques_problem_set.pdf</a>
+</div>
+</details>
 
-网页尾部 = """
 </div>
 
 <script>
@@ -85,22 +133,3 @@ function filterFiles() {
 </script>
 </body>
 </html>
-"""
-
-网页主体 = ""
-# 排序文件夹
-所有项目 = sorted(os.listdir('.'))
-
-for 文件夹名 in 所有项目:
-    if os.path.isdir(文件夹名) and 文件夹名 not in 忽略目录:
-        网页主体 += f'<details open>\n<summary>{文件夹名}</summary>\n<div class="file-list">\n'
-        # 排序文件内容
-        目录内容 = sorted(os.listdir(文件夹名))
-        for 文件名 in 目录内容:
-            if 文件名 not in 忽略文件:
-                文件路径 = f"{文件夹名}/{文件名}"
-                网页主体 += f'<a href="{文件路径}" class="card">{文件名}</a>\n'
-        网页主体 += '</div>\n</details>\n'
-
-with open('index.html', 'w', encoding='utf-8') as f:
-    f.write(网页头部 + 网页主体 + 网页尾部)
