@@ -1,0 +1,98 @@
+{
+    "gps_a1": {
+        "latitude": 30.3080642,
+        "longitude": 120.0778692
+    },
+    "gps_a2": {
+        "latitude": 30.3071599,
+        "longitude": 120.078035
+    },
+    "gps_b1": {
+        "latitude": 30.308055,
+        "longitude": 120.0778733
+    },
+    "gps_b2": {
+        "latitude": 30.3071567,
+        "longitude": 120.078035
+    },
+    "gps_c1": {
+        "latitude": 30.308055,
+        "longitude": 120.0778735
+    },
+    "gps_c2": {
+        "latitude": 30.3071569,
+        "longitude": 120.078035
+    },
+    "bds_a1": {
+        "latitude": 30.3080116,
+        "longitude": 120.0778265
+    },
+    "bds_a2": {
+        "latitude": 30.3072606,
+        "longitude": 120.0779888
+    },
+    "bds_b1": {
+        "latitude": 30.3079823,
+        "longitude": 120.0777498
+    },
+    "bds_b2": {
+        "latitude": 30.3072113,
+        "longitude": 120.0779708
+    },
+    "bds_c1": {
+        "latitude": 30.3081499,
+        "longitude": 120.0777704
+    },
+    "bds_c2": {
+        "latitude": 30.3072323,
+        "longitude": 120.0779305
+    },
+    "double_a1": {
+        "latitude": 30.3080409,
+        "longitude": 120.0779011
+    },
+    "double_a2": {
+        "latitude": 30.307179,
+        "longitude": 120.0780671
+    },
+    "double_b1": {
+        "latitude": 30.3080549,
+        "longitude": 120.077878
+    },
+    "double_b2": {
+        "latitude": 30.3071773,
+        "longitude": 120.0780745
+    },
+    "double_c1": {
+        "latitude": 30.3080551,
+        "longitude": 120.0778857
+    },
+    "double_c2": {
+        "latitude": 30.3072068,
+        "longitude": 120.0780505
+    },
+    "gps_d1": {
+        "latitude": 30.3081605,
+        "longitude": 120.0778322
+    },
+    "gps_d2": {
+        "latitude": 30.3072467,
+        "longitude": 120.0779886
+    },
+    "bds_d1": {
+        "latitude": 30.3081555,
+        "longitude": 120.077791
+    },
+    "bds_d2": {
+        "latitude": 30.3072438,
+        "longitude": 120.0779889
+    },
+    "double_d1": {
+        "latitude": 30.3077709,
+        "longitude": 120.0764008
+    },
+    "double_d2": {
+        "latitude": 30.3069848,
+        "longitude": 120.0766351
+    }
+}
