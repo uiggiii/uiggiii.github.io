@@ -2,10 +2,14 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Chengkuan Zeng</title>
 <meta name="description" content="Chengkuan Zeng (曾成宽), undergraduate at Zhejiang University studying Agricultural Engineering with a minor in Physics, working on multimodal learning and AI.">
-<meta name="theme-color" content="#2f7bb3">
+<meta name="theme-color" content="#f6f8fa" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#11181f" media="(prefers-color-scheme: dark)">
+<meta name="color-scheme" content="light dark">
+<meta name="format-detection" content="telephone=no">
+<link rel="apple-touch-icon" href="self_picture.jpg">
 <link rel="preload" href="fonts/instrument-serif-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/schibsted-grotesk-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
 <style>
@@ -35,6 +39,7 @@
     --muted: #5a6977;
     --rule: #d5dee7;
     --paper: #f6f8fa;
+    --body: #2b3946;
     --link: #1f639a;
 
     --serif: "Instrument Serif", "Songti SC", "Noto Serif SC", "Source Han Serif SC", SimSun, Georgia, serif;
@@ -43,7 +48,14 @@
 
   * { box-sizing: border-box; }
 
-  html { -webkit-text-size-adjust: 100%; }
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+
+  /* Big monitors: scale the whole page up so it doesn't look tiny */
+  @media (min-width: 1600px) { html { font-size: 112.5%; } }
+  @media (min-width: 2200px) { html { font-size: 131.25%; } }
 
   body {
     margin: 0;
@@ -58,7 +70,11 @@
   .page {
     max-width: 44rem;
     margin: 0 auto;
-    padding: clamp(2.5rem, 8vh, 5rem) 1.5rem 4rem;
+    padding:
+      clamp(2.5rem, 8vh, 5rem)
+      max(1.5rem, env(safe-area-inset-right))
+      calc(4rem + env(safe-area-inset-bottom))
+      max(1.5rem, env(safe-area-inset-left));
   }
 
   .masthead {
@@ -70,8 +86,8 @@
   /* Fixed ID-photo size, roughly a 1-inch print (5:7) */
   .avatar {
     flex: none;
-    width: 100px;
-    height: 140px;
+    width: 6.25rem;
+    height: 8.75rem;
     object-fit: cover;
     border-radius: 4px;
     background: var(--photo-blue-top);
@@ -103,7 +119,7 @@
 
   .about p {
     margin: 1.25rem 0 0;
-    color: #2b3946;
+    color: var(--body);
   }
 
   .facts {
@@ -141,6 +157,15 @@
   .contact { list-style: none; margin: 0; padding: 0; }
   .contact li + li { margin-top: 0.35rem; }
 
+  /* Touch screens: give each link a comfortable tap area */
+  @media (pointer: coarse) {
+    .contact a {
+      display: inline-block;
+      padding: 0.3rem 0;
+    }
+    .contact li + li { margin-top: 0.1rem; }
+  }
+
   a {
     color: var(--link);
     text-decoration: underline;
@@ -150,7 +175,9 @@
     word-break: break-word;
   }
 
-  a:hover { text-decoration-color: currentColor; }
+  @media (hover: hover) {
+    a:hover { text-decoration-color: currentColor; }
+  }
 
   a:focus-visible {
     outline: 2px solid var(--link);
@@ -164,10 +191,53 @@
     font-size: 0.875rem;
   }
 
+  /* Phones */
   @media (max-width: 560px) {
+    body { font-size: 1rem; }
     .masthead { gap: 1.1rem; }
-    .avatar { width: 80px; height: 112px; }
+    .avatar { width: 5rem; height: 7rem; }
+    .lead { font-size: 1.2rem; margin-top: 1.75rem; }
+    .facts { margin-top: 2.5rem; }
     .fact { grid-template-columns: 1fr; gap: 0.25rem; }
+  }
+
+  /* Very narrow phones (e.g. iPhone SE 1st gen, folded screens) */
+  @media (max-width: 360px) {
+    .masthead { gap: 0.9rem; }
+    .avatar { width: 4.25rem; height: 5.95rem; }
+    h1 { font-size: 2.25rem; }
+    .hanzi { font-size: 1.1rem; }
+  }
+
+  /* Phones held sideways: less top space so the name stays in view */
+  @media (max-height: 500px) and (orientation: landscape) {
+    .page { padding-top: 1.5rem; }
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --ink: #e6edf3;
+      --muted: #94a3b1;
+      --rule: #2a3542;
+      --paper: #11181f;
+      --body: #c9d3dc;
+      --link: #7cb6e8;
+    }
+    .avatar { filter: brightness(0.92); }
+  }
+
+  @media print {
+    :root {
+      --ink: #000;
+      --muted: #444;
+      --body: #111;
+      --rule: #bbb;
+      --paper: #fff;
+      --link: #000;
+    }
+    .page { max-width: none; padding: 0; }
+    .fact { break-inside: avoid; }
+    a { text-decoration: none; }
   }
 
 </style>
