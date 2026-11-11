@@ -33,8 +33,7 @@
   }
 
   :root {
-    /* Sampled from the portrait's backdrop; shows while the photo loads */
-    --photo-blue-top: #3082bb;
+    --photo-blue: #3082bb; /* sampled from the portrait's backdrop */
     --ink: #15222e;
     --muted: #5a6977;
     --rule: #d5dee7;
@@ -53,9 +52,9 @@
     text-size-adjust: 100%;
   }
 
-  /* Big monitors: scale the whole page up so it doesn't look tiny */
-  @media (min-width: 1600px) { html { font-size: 112.5%; } }
-  @media (min-width: 2200px) { html { font-size: 131.25%; } }
+  /* Big monitors: scale everything up so it doesn't look tiny */
+  @media (min-width: 1700px) { html { font-size: 112.5%; } }
+  @media (min-width: 2300px) { html { font-size: 131.25%; } }
 
   body {
     margin: 0;
@@ -68,36 +67,45 @@
   }
 
   .page {
-    max-width: 44rem;
+    max-width: 78rem;
     margin: 0 auto;
     padding:
-      clamp(2.5rem, 8vh, 5rem)
-      max(1.5rem, env(safe-area-inset-right))
-      calc(4rem + env(safe-area-inset-bottom))
-      max(1.5rem, env(safe-area-inset-left));
+      clamp(2.5rem, 7vh, 4.5rem)
+      max(clamp(1.5rem, 4vw, 3.5rem), env(safe-area-inset-right))
+      calc(3rem + env(safe-area-inset-bottom))
+      max(clamp(1.5rem, 4vw, 3.5rem), env(safe-area-inset-left));
   }
 
+  /* ---------- Header ---------- */
+
   .masthead {
-    display: flex;
-    align-items: center;
-    gap: 1.75rem;
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    grid-template-areas:
+      "photo name"
+      "photo tagline";
+    align-items: end;
+    column-gap: 1.75rem;
+    padding-bottom: 2.5rem;
+    border-bottom: 1px solid var(--rule);
   }
 
   /* Fixed ID-photo size, roughly a 1-inch print (5:7) */
   .avatar {
-    flex: none;
+    grid-area: photo;
+    align-self: center;
     width: 6.25rem;
     height: 8.75rem;
     object-fit: cover;
     border-radius: 4px;
-    background: var(--photo-blue-top);
+    background: var(--photo-blue);
   }
 
   h1 {
     margin: 0;
     font-family: var(--serif);
     font-weight: 400;
-    font-size: clamp(2.6rem, 6vw, 4rem);
+    font-size: clamp(2.6rem, 5.2vw, 4.5rem);
     line-height: 0.98;
     letter-spacing: -0.015em;
   }
@@ -110,61 +118,95 @@
     color: var(--muted);
   }
 
-  .lead {
-    margin: 2.25rem 0 0;
-    font-size: 1.3rem;
+  .name { grid-area: name; }
+
+  .tagline {
+    grid-area: tagline;
+    align-self: start;
+    margin: 1rem 0 0;
+    max-width: 40rem;
+    font-size: 1.2rem;
     line-height: 1.45;
     font-weight: 500;
-  }
-
-  .about p {
-    margin: 1.25rem 0 0;
     color: var(--body);
   }
 
-  .facts {
-    margin: 3rem 0 0;
-    border-top: 1px solid var(--rule);
+  /* ---------- Two-column body ---------- */
+
+  .layout {
+    display: grid;
+    grid-template-columns: 17rem minmax(0, 1fr);
+    grid-template-areas: "side main";
+    gap: clamp(3rem, 6vw, 6rem);
+    padding-top: 3rem;
   }
 
-  .fact {
+  .main { grid-area: main; }
+  .side { grid-area: side; }
+
+  .side-inner {
+    position: sticky;
+    top: 2.5rem;
+  }
+
+  .text { max-width: 48rem; }
+
+  .about p {
+    margin: 0 0 1.25rem;
+    color: var(--body);
+  }
+
+  h2 {
+    margin: 3.25rem 0 0;
+    padding-bottom: 0.6rem;
+    border-bottom: 1px solid var(--rule);
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: 1.85rem;
+    line-height: 1.2;
+  }
+
+  .entry {
     display: grid;
-    grid-template-columns: 8.5rem 1fr;
-    gap: 1rem;
-    padding: 1.1rem 0;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 0.25rem 2rem;
+    padding: 1.25rem 0;
     border-bottom: 1px solid var(--rule);
   }
 
-  .fact dt {
+  .entry-title { margin: 0; font-weight: 500; }
+
+  .entry-when {
+    margin: 0;
     color: var(--muted);
     font-size: 0.95rem;
-    padding-top: 0.1rem;
+    white-space: nowrap;
+  }
+
+  .entry-detail {
+    grid-column: 1 / -1;
+    margin: 0;
+    color: var(--muted);
+    font-size: 0.95rem;
+  }
+
+  .entry-detail strong { color: var(--ink); font-weight: 500; }
+
+  /* Sidebar facts */
+  .facts { margin: 0; }
+
+  .fact + .fact { margin-top: 1.6rem; }
+
+  .fact dt {
+    color: var(--muted);
+    font-size: 0.9rem;
+    margin-bottom: 0.25rem;
   }
 
   .fact dd { margin: 0; }
 
-  .fact dd span { display: block; }
-
-  .fact .sub {
-    color: var(--muted);
-    font-size: 0.95rem;
-  }
-
-  .fact .sub + span:not(.sub) { margin-top: 0.75rem; }
-
-  .fact strong { color: var(--ink); font-weight: 500; }
-
-  .contact { list-style: none; margin: 0; padding: 0; }
-  .contact li + li { margin-top: 0.35rem; }
-
-  /* Touch screens: give each link a comfortable tap area */
-  @media (pointer: coarse) {
-    .contact a {
-      display: inline-block;
-      padding: 0.3rem 0;
-    }
-    .contact li + li { margin-top: 0.1rem; }
-  }
+  .plain-list { list-style: none; margin: 0; padding: 0; }
+  .plain-list li + li { margin-top: 0.3rem; }
 
   a {
     color: var(--link);
@@ -185,31 +227,71 @@
     border-radius: 2px;
   }
 
+  /* Touch screens: comfortable tap area for links */
+  @media (pointer: coarse) {
+    .contact a {
+      display: inline-block;
+      padding: 0.3rem 0;
+    }
+    .contact li + li { margin-top: 0.1rem; }
+  }
+
   footer {
-    margin-top: 3rem;
+    margin-top: 4rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--rule);
     color: var(--muted);
     font-size: 0.875rem;
   }
 
-  /* Phones */
-  @media (max-width: 560px) {
-    body { font-size: 1rem; }
-    .masthead { gap: 1.1rem; }
-    .avatar { width: 5rem; height: 7rem; }
-    .lead { font-size: 1.2rem; margin-top: 1.75rem; }
-    .facts { margin-top: 2.5rem; }
-    .fact { grid-template-columns: 1fr; gap: 0.25rem; }
+  /* ---------- Tablets: one column, facts in a grid ---------- */
+  @media (max-width: 960px) {
+    .layout {
+      grid-template-columns: minmax(0, 1fr);
+      grid-template-areas: "main" "side";
+      gap: 3rem;
+    }
+
+    .side-inner { position: static; }
+
+    .facts {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1.6rem 2rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--rule);
+    }
+
+    .fact + .fact { margin-top: 0; }
   }
 
-  /* Very narrow phones (e.g. iPhone SE 1st gen, folded screens) */
+  /* ---------- Phones ---------- */
+  @media (max-width: 560px) {
+    body { font-size: 1rem; }
+    .masthead { column-gap: 1.1rem; padding-bottom: 2rem; }
+    .avatar { width: 5rem; height: 7rem; }
+    .masthead {
+      grid-template-areas:
+        "photo name"
+        "tagline tagline";
+      align-items: center;
+    }
+    .tagline { margin-top: 1.25rem; font-size: 1.1rem; }
+    .layout { padding-top: 2rem; }
+    h2 { font-size: 1.6rem; margin-top: 2.5rem; }
+    .entry { grid-template-columns: minmax(0, 1fr); }
+    .facts { grid-template-columns: minmax(0, 1fr); }
+  }
+
+  /* Very narrow phones */
   @media (max-width: 360px) {
-    .masthead { gap: 0.9rem; }
+    .masthead { column-gap: 0.9rem; }
     .avatar { width: 4.25rem; height: 5.95rem; }
     h1 { font-size: 2.25rem; }
     .hanzi { font-size: 1.1rem; }
   }
 
-  /* Phones held sideways: less top space so the name stays in view */
+  /* Phones held sideways */
   @media (max-height: 500px) and (orientation: landscape) {
     .page { padding-top: 1.5rem; }
   }
@@ -236,73 +318,90 @@
       --link: #000;
     }
     .page { max-width: none; padding: 0; }
-    .fact { break-inside: avoid; }
+    .side-inner { position: static; }
+    .entry, .fact { break-inside: avoid; }
     a { text-decoration: none; }
   }
-
 </style>
 </head>
 <body>
-  <main class="page">
-        <header class="masthead">
-          <img class="avatar" src="self_picture.jpg" alt="Portrait of Chengkuan Zeng" width="100" height="140">
-          <div>
-            <h1>Chengkuan Zeng</h1>
-            <p class="hanzi" lang="zh-CN">曾成宽</p>
-          </div>
-        </header>
+  <div class="page">
+    <header class="masthead">
+      <img class="avatar" src="self_picture.jpg" alt="Portrait of Chengkuan Zeng" width="100" height="140">
+      <div class="name">
+        <h1>Chengkuan Zeng</h1>
+        <p class="hanzi" lang="zh-CN">曾成宽</p>
+      </div>
+      <p class="tagline">Undergraduate at Zhejiang University, working my way from engineering and physics toward AI.</p>
+    </header>
 
-        <p class="lead">Undergraduate at Zhejiang University, working my way from engineering and physics toward AI.</p>
+    <div class="layout">
+      <main class="main">
+        <div class="text">
+          <section class="about" aria-label="About">
+            <p>I'm an undergraduate in the College of Biosystems Engineering and Food Science at Zhejiang University, majoring in Agricultural Engineering with a minor in Physics. My coursework so far has covered mechanics, control theory and computational physics, and I've built a few small robotics projects along the way.</p>
+            <p>My research so far is in multimodal learning. I'm a co-author on Spatial-Omni, which brings spatial audio understanding into multimodal large language models using First-Order Ambisonics (FOA) encoding.</p>
+            <p>Alongside my degree I'm teaching myself computer science, starting with UC Berkeley's CS61A. I'm aiming for a career in AI, either in research or in building the infrastructure that AI systems run on.</p>
+          </section>
 
-        <section class="about" aria-label="About">
-          <p>I'm an undergraduate in the College of Biosystems Engineering and Food Science at Zhejiang University, majoring in Agricultural Engineering with a minor in Physics. My coursework so far has covered mechanics, control theory and computational physics, and I've built a few small robotics projects along the way.</p>
-          <p>My research so far is in multimodal learning. I'm a co-author on Spatial-Omni, which brings spatial audio understanding into multimodal large language models using First-Order Ambisonics (FOA) encoding.</p>
-          <p>Alongside my degree I'm teaching myself computer science, starting with UC Berkeley's CS61A. I'm aiming for a career in AI, either in research or in building the infrastructure that AI systems run on.</p>
-        </section>
+          <section aria-labelledby="edu">
+            <h2 id="edu">Education</h2>
+            <div class="entry">
+              <p class="entry-title">Zhejiang University</p>
+              <p class="entry-when">2024 – 2028 (expected)</p>
+              <p class="entry-detail">B.Eng. in Agricultural Engineering, minor in Physics<br>College of Biosystems Engineering and Food Science</p>
+            </div>
+          </section>
 
-        <dl class="facts">
-          <div class="fact">
-            <dt>Education</dt>
-            <dd>
-              <span>Zhejiang University</span>
-              <span class="sub">College of Biosystems Engineering and Food Science</span>
-              <span class="sub">B.Eng. in Agricultural Engineering, minor in Physics</span>
-              <span class="sub">2024 – 2028 (expected)</span>
-            </dd>
-          </div>
-          <div class="fact">
-            <dt>Interests</dt>
-            <dd>Multimodal learning, spatial audio processing, deep learning</dd>
-          </div>
-          <div class="fact">
-            <dt>Publications</dt>
-            <dd>
-              <span>Spatial-Omni: Spatial Audio Understanding Integration in Multimodal LLMs via FOA Encoding</span>
-              <span class="sub">Zhiyuan Zhu, Yixuan Chen, Yiwen Shao, Wenxiang Guo, Changhao Pan, Yu Zhang, Yuxiang Wang, Wei Liu, Houhua Zhang, <strong>Chengkuan Zeng</strong>, Wenbo Cheng, Yunxi Liu, Rui Yang, Steve Yves, Liefeng Bo, Zhou Zhao</span>
-              <span class="sub">Under review, 2026</span>
-            </dd>
-          </div>
-          <div class="fact">
-            <dt>Based in</dt>
-            <dd>Hangzhou, China</dd>
-          </div>
-          <div class="fact">
-            <dt>Pronouns</dt>
-            <dd>he/him</dd>
-          </div>
-          <div class="fact">
-            <dt>Contact</dt>
-            <dd>
-              <ul class="contact">
-                <li><a href="mailto:3240105591@zju.edu.cn">3240105591@zju.edu.cn</a></li>
-                <li><a href="mailto:a3218374700@gmail.com">a3218374700@gmail.com</a></li>
-                <li><a href="https://github.com/uiggiii">github.com/uiggiii</a></li>
-              </ul>
-            </dd>
-          </div>
-        </dl>
+          <section aria-labelledby="pubs">
+            <h2 id="pubs">Publications</h2>
+            <div class="entry">
+              <p class="entry-title">Spatial-Omni: Spatial Audio Understanding Integration in Multimodal LLMs via FOA Encoding</p>
+              <p class="entry-when">2026</p>
+              <p class="entry-detail">Zhiyuan Zhu, Yixuan Chen, Yiwen Shao, Wenxiang Guo, Changhao Pan, Yu Zhang, Yuxiang Wang, Wei Liu, Houhua Zhang, <strong>Chengkuan Zeng</strong>, Wenbo Cheng, Yunxi Liu, Rui Yang, Steve Yves, Liefeng Bo, Zhou Zhao</p>
+              <p class="entry-detail">Under review</p>
+            </div>
+          </section>
+        </div>
+      </main>
 
-        <footer>© 2026 Chengkuan Zeng</footer>
-  </main>
+      <aside class="side" aria-label="Details">
+        <div class="side-inner">
+          <dl class="facts">
+            <div class="fact">
+              <dt>Interests</dt>
+              <dd>
+                <ul class="plain-list">
+                  <li>Multimodal learning</li>
+                  <li>Spatial audio processing</li>
+                  <li>Deep learning</li>
+                </ul>
+              </dd>
+            </div>
+            <div class="fact">
+              <dt>Based in</dt>
+              <dd>Hangzhou, China</dd>
+            </div>
+            <div class="fact">
+              <dt>Pronouns</dt>
+              <dd>he/him</dd>
+            </div>
+            <div class="fact">
+              <dt>Contact</dt>
+              <dd>
+                <ul class="plain-list contact">
+                  <li><a href="mailto:3240105591@zju.edu.cn">3240105591@zju.edu.cn</a></li>
+                  <li><a href="mailto:a3218374700@gmail.com">a3218374700@gmail.com</a></li>
+                  <li><a href="https://github.com/uiggiii">github.com/uiggiii</a></li>
+                </ul>
+              </dd>
+            </div>
+          </dl>
+        </div>
+      </aside>
+    </div>
+
+    <footer>© 2026 Chengkuan Zeng</footer>
+  </div>
 </body>
 </html>
