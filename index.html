@@ -31,7 +31,6 @@
   :root {
     /* Sampled from the portrait's backdrop; shows while the photo loads */
     --photo-blue-top: #3082bb;
-    --photo-blue-bottom: #2a73ad;
     --ink: #15222e;
     --muted: #5a6977;
     --rule: #d5dee7;
@@ -57,55 +56,40 @@
   }
 
   .page {
-    display: grid;
-    grid-template-columns: minmax(320px, 42%) 1fr;
-    min-height: 100vh;
+    max-width: 44rem;
+    margin: 0 auto;
+    padding: clamp(2.5rem, 8vh, 5rem) 1.5rem 4rem;
   }
 
-  /* Portrait panel: the one bold element on the page */
-  .portrait {
-    position: sticky;
-    top: 0;
-    height: 100vh;
-    overflow: hidden;
-    background: linear-gradient(to bottom, var(--photo-blue-top), var(--photo-blue-bottom));
-  }
-
-  .portrait img {
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: 50% 30%;
-    animation: rise 1100ms cubic-bezier(.2, .7, .2, 1) both;
-  }
-
-  @keyframes rise {
-    from { opacity: 0; transform: scale(1.04); }
-    to { opacity: 1; transform: none; }
-  }
-
-  .content {
+  .masthead {
     display: flex;
     align-items: center;
-    padding: 4rem clamp(1.5rem, 6vw, 6rem);
+    gap: 1.75rem;
   }
 
-  .inner { max-width: 36rem; width: 100%; }
+  /* Fixed ID-photo size, roughly a 1-inch print (5:7) */
+  .avatar {
+    flex: none;
+    width: 100px;
+    height: 140px;
+    object-fit: cover;
+    border-radius: 4px;
+    background: var(--photo-blue-top);
+  }
 
   h1 {
     margin: 0;
     font-family: var(--serif);
     font-weight: 400;
-    font-size: clamp(3.25rem, 6.4vw, 5.75rem);
+    font-size: clamp(2.6rem, 6vw, 4rem);
     line-height: 0.98;
     letter-spacing: -0.015em;
   }
 
   .hanzi {
-    margin: 0.6rem 0 0;
+    margin: 0.5rem 0 0;
     font-family: var(--serif);
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     letter-spacing: 0.3em;
     color: var(--muted);
   }
@@ -180,36 +164,23 @@
     font-size: 0.875rem;
   }
 
-  @media (max-width: 820px) {
-    .page { grid-template-columns: 1fr; }
-
-    .portrait {
-      position: relative;
-      height: min(100vw, 460px);
-    }
-
-    .portrait img { object-position: 50% 12%; }
-
-    .content { padding: 2.5rem 1.5rem 3rem; }
-
+  @media (max-width: 560px) {
+    .masthead { gap: 1.1rem; }
+    .avatar { width: 80px; height: 112px; }
     .fact { grid-template-columns: 1fr; gap: 0.25rem; }
   }
 
-  @media (prefers-reduced-motion: reduce) {
-    .portrait img { animation: none; }
-  }
 </style>
 </head>
 <body>
   <main class="page">
-    <div class="portrait">
-      <img src="self_picture.jpg" alt="Portrait of Chengkuan Zeng" width="1052" height="1471">
-    </div>
-
-    <div class="content">
-      <div class="inner">
-        <h1>Chengkuan Zeng</h1>
-        <p class="hanzi" lang="zh-CN">曾成宽</p>
+        <header class="masthead">
+          <img class="avatar" src="self_picture.jpg" alt="Portrait of Chengkuan Zeng" width="100" height="140">
+          <div>
+            <h1>Chengkuan Zeng</h1>
+            <p class="hanzi" lang="zh-CN">曾成宽</p>
+          </div>
+        </header>
 
         <p class="lead">Undergraduate at Zhejiang University, working my way from engineering and physics toward AI.</p>
 
@@ -262,8 +233,6 @@
         </dl>
 
         <footer>© 2026 Chengkuan Zeng</footer>
-      </div>
-    </div>
   </main>
 </body>
 </html>
